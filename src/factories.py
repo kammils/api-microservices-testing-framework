@@ -58,7 +58,7 @@ class ProductFactory(factory.Factory):
     id = Sequence(lambda n: n + 1)
     name = Faker("catch_phrase")
     description = Faker("text", max_nb_chars=200)
-    price = Faker("pydecimal", left_digits=3, right_digits=2, positive=True)
+    price = LazyAttribute(lambda x: round(float(fake.pydecimal(left_digits=3, right_digits=2, positive=True)), 2))
     category = Faker(
         "random_element", elements=["Electronics", "Clothing", "Books", "Food", "Home"]
     )
@@ -86,14 +86,18 @@ class OrderFactory(factory.Factory):
     user_id = Faker("random_int", min=1, max=1000)
     product_id = Faker("random_int", min=1, max=1000)
     quantity = Faker("random_int", min=1, max=10)
-    unit_price = Faker("pydecimal", left_digits=3, right_digits=2, positive=True)
-    total_price = LazyAttribute(lambda o: float(o.unit_price) * o.quantity)
+    unit_price = LazyAttribute(
+        lambda x: round(float(fake.pydecimal(left_digits=3, right_digits=2, positive=True)), 2)
+    )
+    total_price = LazyAttribute(lambda o: round(o.unit_price * o.quantity, 2))
     status = Faker(
         "random_element",
         elements=["pending", "processing", "shipped", "delivered", "cancelled"],
     )
     shipping_address = Faker("address")
-    payment_method = Faker("random_element", elements=["credit_card", "debit_card", "paypal", "cash"])
+    payment_method = Faker(
+        "random_element", elements=["credit_card", "debit_card", "paypal", "cash"]
+    )
     created_at = LazyAttribute(lambda x: datetime.now().isoformat())
     updated_at = LazyAttribute(lambda x: datetime.now().isoformat())
 

@@ -4,9 +4,10 @@ Unit Tests for API Client
 Tests the APIClient class functionality in isolation.
 """
 
-import pytest
 from unittest.mock import Mock, patch
+
 import httpx
+import pytest
 
 from src.api_client import APIClient
 

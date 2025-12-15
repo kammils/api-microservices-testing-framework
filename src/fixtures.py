@@ -123,15 +123,15 @@ def product_service_client(config) -> Generator[APIClient, None, None]:
 @pytest.fixture(autouse=True)
 def log_test_info(request):
     """Automatically log test execution info for all tests"""
-    logger.info(f"=" * 80)
+    logger.info("=" * 80)
     logger.info(f"Starting test: {request.node.nodeid}")
-    logger.info(f"=" * 80)
+    logger.info("=" * 80)
 
     yield
 
-    logger.info(f"=" * 80)
+    logger.info("=" * 80)
     logger.info(f"Completed test: {request.node.nodeid}")
-    logger.info(f"=" * 80)
+    logger.info("=" * 80)
 
 
 @pytest.fixture(scope="function")

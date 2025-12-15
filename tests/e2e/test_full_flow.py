@@ -4,11 +4,11 @@ End-to-End Tests
 Tests complete user flows across multiple microservices.
 """
 
-import pytest
 import httpx
+import pytest
 
 from src import assertions
-from src.factories import generate_user, generate_product, generate_order
+from src.factories import generate_order, generate_product, generate_user
 
 
 @pytest.mark.e2e
@@ -243,7 +243,7 @@ class TestBulkOperations:
             order_count = 5
             successful_orders = 0
 
-            for i in range(order_count):
+            for _ in range(order_count):
                 order_data = generate_order()
                 response = order_service_client.post("/orders", json=order_data)
 

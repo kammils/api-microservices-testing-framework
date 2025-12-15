@@ -5,11 +5,11 @@ Tests actual API endpoints and microservices integration.
 These tests require actual services to be running or use mock servers.
 """
 
-import pytest
 import httpx
+import pytest
 
 from src import assertions
-from src.factories import generate_user, generate_product, generate_order
+from src.factories import generate_order, generate_product, generate_user
 
 
 @pytest.mark.integration

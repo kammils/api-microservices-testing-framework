@@ -4,7 +4,8 @@ Custom Assertion Helpers
 Provides custom assertion functions for API testing with detailed error messages.
 """
 
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, Optional
+
 import httpx
 
 
@@ -19,8 +20,7 @@ def assert_status_code(response: httpx.Response, expected: int, message: Optiona
     """
     actual = response.status_code
     error_msg = message or (
-        f"Expected status code {expected}, but got {actual}.\n"
-        f"Response: {response.text[:200]}"
+        f"Expected status code {expected}, but got {actual}.\n" f"Response: {response.text[:200]}"
     )
     assert actual == expected, error_msg
 
@@ -70,7 +70,7 @@ def assert_json_response(response: httpx.Response, message: Optional[str] = None
         response.json()
     except Exception as e:
         error_msg = message or f"Response is not valid JSON: {str(e)}\nResponse: {response.text}"
-        raise AssertionError(error_msg)
+        raise AssertionError(error_msg) from e
 
 
 def assert_json_contains(
@@ -213,9 +213,7 @@ def assert_content_type(
     """
     content_type = response.headers.get("content-type", "")
     if expected_type not in content_type:
-        error_msg = message or (
-            f"Expected content type '{expected_type}', got '{content_type}'"
-        )
+        error_msg = message or (f"Expected content type '{expected_type}', got '{content_type}'")
         raise AssertionError(error_msg)
 
 
@@ -279,7 +277,9 @@ def assert_error_response(
         message: Optional custom error message
     """
     if 200 <= response.status_code < 300:
-        error_msg = message or f"Expected error response, got successful status {response.status_code}"
+        error_msg = (
+            message or f"Expected error response, got successful status {response.status_code}"
+        )
         raise AssertionError(error_msg)
 
     if expected_error:

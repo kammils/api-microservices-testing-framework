@@ -6,7 +6,7 @@ and comprehensive session management for microservices testing.
 """
 
 import logging
-from typing import Any, Dict, Optional, Union
+from typing import Any, Dict, Optional
 from urllib.parse import urljoin
 
 import httpx
@@ -142,9 +142,7 @@ class APIClient:
     def _mask_sensitive_headers(headers: Dict[str, str]) -> Dict[str, str]:
         """Mask sensitive headers"""
         sensitive_keys = {"authorization", "x-api-key", "api-key", "token", "password"}
-        return {
-            k: "***MASKED***" if k.lower() in sensitive_keys else v for k, v in headers.items()
-        }
+        return {k: "***MASKED***" if k.lower() in sensitive_keys else v for k, v in headers.items()}
 
     @staticmethod
     def _mask_sensitive_data(data: Any) -> Any:

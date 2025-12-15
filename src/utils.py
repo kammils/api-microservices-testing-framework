@@ -28,18 +28,16 @@ def retry_on_failure(max_attempts: int = 3, delay: float = 1.0, backoff: float =
         @wraps(func)
         def wrapper(*args, **kwargs):
             current_delay = delay
-            last_exception = None
 
             for attempt in range(max_attempts):
                 try:
                     return func(*args, **kwargs)
-                except Exception as e:
-                    last_exception = e
+                except Exception:
                     if attempt < max_attempts - 1:
                         time.sleep(current_delay)
                         current_delay *= backoff
                     else:
-                        raise last_exception
+                        raise
 
         return wrapper
 

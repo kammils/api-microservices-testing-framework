@@ -5,8 +5,8 @@ Handles loading and validation of configuration from environment variables
 using Pydantic settings.
 """
 
-import os
 from typing import Optional
+
 from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -41,9 +41,7 @@ class APIConfig(BaseSettings):
     # Microservices Endpoints
     user_service_url: str = Field(default="http://localhost:8001", alias="USER_SERVICE_URL")
     order_service_url: str = Field(default="http://localhost:8002", alias="ORDER_SERVICE_URL")
-    product_service_url: str = Field(
-        default="http://localhost:8003", alias="PRODUCT_SERVICE_URL"
-    )
+    product_service_url: str = Field(default="http://localhost:8003", alias="PRODUCT_SERVICE_URL")
 
     # Test Data
     use_mock_data: bool = Field(default=True, alias="USE_MOCK_DATA")

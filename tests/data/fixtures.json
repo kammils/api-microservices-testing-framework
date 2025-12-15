@@ -1,0 +1,84 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "testuser1",
+      "email": "testuser1@example.com",
+      "first_name": "Test",
+      "last_name": "User",
+      "age": 25,
+      "is_active": true
+    },
+    {
+      "id": 2,
+      "username": "testuser2",
+      "email": "testuser2@example.com",
+      "first_name": "Demo",
+      "last_name": "User",
+      "age": 30,
+      "is_active": true
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "name": "Laptop",
+      "description": "High-performance laptop",
+      "price": 999.99,
+      "category": "Electronics",
+      "sku": "LAP-001",
+      "stock_quantity": 50,
+      "is_available": true
+    },
+    {
+      "id": 2,
+      "name": "Smartphone",
+      "description": "Latest smartphone model",
+      "price": 699.99,
+      "category": "Electronics",
+      "sku": "PHN-001",
+      "stock_quantity": 100,
+      "is_available": true
+    }
+  ],
+  "orders": [
+    {
+      "id": 1,
+      "order_number": "ORD-00000001",
+      "user_id": 1,
+      "product_id": 1,
+      "quantity": 1,
+      "unit_price": 999.99,
+      "total_price": 999.99,
+      "status": "pending"
+    },
+    {
+      "id": 2,
+      "order_number": "ORD-00000002",
+      "user_id": 2,
+      "product_id": 2,
+      "quantity": 2,
+      "unit_price": 699.99,
+      "total_price": 1399.98,
+      "status": "processing"
+    }
+  ],
+  "test_scenarios": {
+    "valid_user": {
+      "username": "validuser",
+      "email": "valid@example.com",
+      "password": "SecurePass123!"
+    },
+    "invalid_user": {
+      "username": "",
+      "email": "invalid-email",
+      "password": "weak"
+    },
+    "api_endpoints": {
+      "health": "/health",
+      "users": "/users",
+      "products": "/products",
+      "orders": "/orders"
+    }
+  }
+}

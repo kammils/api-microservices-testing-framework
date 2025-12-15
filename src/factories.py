@@ -58,7 +58,9 @@ class ProductFactory(factory.Factory):
     id = Sequence(lambda n: n + 1)
     name = Faker("catch_phrase")
     description = Faker("text", max_nb_chars=200)
-    price = LazyAttribute(lambda x: round(float(fake.pydecimal(left_digits=3, right_digits=2, positive=True)), 2))
+    price = LazyAttribute(
+        lambda x: round(float(fake.pydecimal(left_digits=3, right_digits=2, positive=True)), 2)
+    )
     category = Faker(
         "random_element", elements=["Electronics", "Clothing", "Books", "Food", "Home"]
     )
